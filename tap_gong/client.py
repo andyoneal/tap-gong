@@ -1,5 +1,6 @@
 """REST client handling, including GongStream base class."""
 
+import sys
 from pathlib import Path
 from typing import Any, Dict
 import requests
@@ -8,6 +9,11 @@ from singer_sdk.streams import RESTStream
 from singer_sdk.exceptions import RetriableAPIError, FatalAPIError
 from tap_gong.auth import GongAuthenticator
 from tap_gong.utils import log_error
+
+if sys.version_info >= (3, 9):
+    import importlib.resources as importlib_resources
+else:
+    import importlib_resources
 
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 

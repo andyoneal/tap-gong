@@ -9,6 +9,7 @@ class CallsStream(GongStream):
     name = "calls"
     path = "/v2/calls/extensive"
     primary_keys = ["id"]
+    replication_key = "started"
     records_jsonpath = "$.calls[*]"
     next_page_token_jsonpath = "$.records.cursor"
     rest_method = "POST"
@@ -38,6 +39,7 @@ class CallsStream(GongStream):
                 th.Property("purpose", th.StringType),
                 th.Property("meetingUrl", th.StringType),
                 th.Property("isPrivate", th.BooleanType),
+                th.Property("calendarEventId", th.StringType),
             ),
         ),
         th.Property(
@@ -117,12 +119,49 @@ class CallsStream(GongStream):
             "content",
             th.ObjectType(
                 th.Property(
-                    "trackers",
+                    "structure",
                     th.ArrayType(
                         th.ObjectType(
                             th.Property("name", th.StringType),
+                            th.Property("duration", th.IntegerType),
+                        )
+                    ),
+                ),
+                th.Property(
+                    "trackers",
+                    th.ArrayType(
+                        th.ObjectType(
+                            th.Property("id", th.StringType),
+                            th.Property("name", th.StringType),
                             th.Property("count", th.IntegerType),
-                            th.Property("type", th.StringType)
+                            th.Property("type", th.StringType),
+                            th.Property(
+                                "occurrences",
+                                th.ArrayType(
+                                    th.ObjectType(
+                                        th.Property("startTime", th.NumberType),
+                                        th.Property("speakerId", th.StringType),
+                                    )
+                                ),
+                            ),
+                            th.Property(
+                                "phrases",
+                                th.ArrayType(
+                                    th.ObjectType(
+                                        th.Property("count", th.NumberType),
+                                        th.Property(
+                                            "occurrences",
+                                            th.ArrayType(
+                                                th.ObjectType(
+                                                    th.Property("startTime", th.NumberType),
+                                                    th.Property("speakerId", th.StringType),
+                                                )
+                                            ),
+                                        ),
+                                        th.Property("phrase", th.StringType),
+                                    )
+                                ),
+                            ),
                         )
                     ),
                 ),
@@ -257,6 +296,9 @@ class CallsStream(GongStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Optional[dict]:
         """Prepare the data payload for the REST API request."""
+        print(self.get_starting_timestamp(context))
+        print()
+        print()
         fromDateTime = helper.get_date_time_string(self.get_starting_timestamp(context), helper.date_time_format_string)
         toDateTime = helper.get_date_time_string_from_config(self.config, helper.end_date_key,
                                                              helper.date_time_format_string)
@@ -273,6 +315,7 @@ class CallsStream(GongStream):
                         "structure": True,
                         "topics": True,
                         "trackers": True,
+                        "trackerOccurences": True,
                     },
                     "interaction": {
                         "personInteractionStats": True,

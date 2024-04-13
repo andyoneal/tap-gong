@@ -30,6 +30,7 @@ class UsersStream(GongStream):
             th.Property("emailsImported", th.BooleanType),
             th.Property("preventEmailImport", th.BooleanType),
             th.Property("nonRecordedMeetingsImported", th.BooleanType),
+            th.Property("gongConnectEnabled", th.BooleanType),
         )),
         th.Property("managerId", th.StringType),
         th.Property("meetingConsentPageUrl", th.StringType),

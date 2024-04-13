@@ -13,13 +13,13 @@ class InteractionStatsStream(GongStream):
         th.Property("userEmailAddress", th.StringType),
         th.Property("userId", th.StringType),
         th.Property("personInteractionStats",
-                    th.ArrayType(
-                        th.ObjectType(
-                            th.Property("name", th.StringType),
-                            th.Property("value", th.NumberType)
-                        )
-                    )
-                    )
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("name", th.StringType),
+                    th.Property("value", th.NumberType)
+                )
+            )
+        )
     ).to_dict()
     path = "/v2/stats/interaction"
     primary_keys = ["userId"]

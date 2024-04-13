@@ -1,5 +1,5 @@
 from dateutil import parser
-from dateutil.relativedelta import *
+from dateutil.relativedelta import relativedelta
 from datetime import datetime, timezone
 
 

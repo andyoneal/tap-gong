@@ -13,24 +13,24 @@ class AggregatedActivityStream(GongStream):
         th.Property("userEmailAddress", th.StringType),
         th.Property("userId", th.StringType),
         th.Property("userAggregateActivityStats",
-                    th.ObjectType(
-                        th.Property("callsAsHost", th.NumberType),
-                        th.Property("callsGaveFeedback", th.NumberType),
-                        th.Property("callsRequestedFeedback", th.NumberType),
-                        th.Property("callsReceivedFeedback", th.NumberType),
-                        th.Property("ownCallsListenedTo", th.NumberType),
-                        th.Property("othersCallsListenedTo", th.NumberType),
-                        th.Property("callsSharedInternally", th.NumberType),
-                        th.Property("callsSharedExternally", th.NumberType),
-                        th.Property("callsScorecardsFilled", th.NumberType),
-                        th.Property("callsScorecardsReceived", th.NumberType),
-                        th.Property("callsAttended", th.NumberType),
-                        th.Property("callsCommentsGiven", th.NumberType),
-                        th.Property("callsCommentsReceived", th.NumberType),
-                        th.Property("callsMarkedAsFeedbackGiven", th.NumberType),
-                        th.Property("callsMarkedAsFeedbackReceived", th.NumberType)
-                    )
-                    )
+            th.ObjectType(
+                th.Property("callsAsHost", th.NumberType),
+                th.Property("callsGaveFeedback", th.NumberType),
+                th.Property("callsRequestedFeedback", th.NumberType),
+                th.Property("callsReceivedFeedback", th.NumberType),
+                th.Property("ownCallsListenedTo", th.NumberType),
+                th.Property("othersCallsListenedTo", th.NumberType),
+                th.Property("callsSharedInternally", th.NumberType),
+                th.Property("callsSharedExternally", th.NumberType),
+                th.Property("callsScorecardsFilled", th.NumberType),
+                th.Property("callsScorecardsReceived", th.NumberType),
+                th.Property("callsAttended", th.NumberType),
+                th.Property("callsCommentsGiven", th.NumberType),
+                th.Property("callsCommentsReceived", th.NumberType),
+                th.Property("callsMarkedAsFeedbackGiven", th.NumberType),
+                th.Property("callsMarkedAsFeedbackReceived", th.NumberType)
+            )
+        )
     ).to_dict()
     path = "/v2/stats/activity/aggregate"
     primary_keys = ["userId"]

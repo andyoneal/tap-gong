@@ -1,5 +1,7 @@
 """Gong tap class."""
 
+from __future__ import annotations
+
 from typing import List
 
 from singer_sdk import Tap, Stream
