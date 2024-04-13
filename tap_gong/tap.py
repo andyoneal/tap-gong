@@ -26,7 +26,7 @@ class TapGong(Tap):
     """Gong tap class."""
     name = "tap-gong"
 
-    def __init__(self, config, state, catalog, parse_env_config, validate_config):
+    def __init__(self, config=None, state=None, catalog=None, parse_env_config=None, validate_config=None):
         super().__init__(config=config, state=state, catalog=catalog, parse_env_config=parse_env_config,
                          validate_config=validate_config)
         """ This is an extended validation to validate start_date and end_date provided through config file. Meltano

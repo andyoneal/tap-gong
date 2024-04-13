@@ -16,6 +16,7 @@ class UsersStream(GongStream):
         th.Property("created", th.DateTimeType),
         th.Property("active", th.BooleanType),
         th.Property("emailAliases", th.ArrayType(th.StringType)),
+        th.Property("trustedEmailAddress", th.StringType),
         th.Property("firstName", th.StringType),
         th.Property("lastName", th.StringType),
         th.Property("title", th.StringType),
@@ -32,5 +33,9 @@ class UsersStream(GongStream):
         )),
         th.Property("managerId", th.StringType),
         th.Property("meetingConsentPageUrl", th.StringType),
+        th.Property("spokenLanguages", th.ObjectType(
+            th.Property("language", th.StringType),
+            th.Property("primary", th.BooleanType),
+        )),
     ).to_dict()
 
