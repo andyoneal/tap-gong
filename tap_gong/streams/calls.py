@@ -296,9 +296,6 @@ class CallsStream(GongStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Optional[dict]:
         """Prepare the data payload for the REST API request."""
-        print(self.get_starting_timestamp(context))
-        print()
-        print()
         fromDateTime = helper.get_date_time_string(self.get_starting_timestamp(context), helper.date_time_format_string)
         toDateTime = helper.get_date_time_string_from_config(self.config, helper.end_date_key,
                                                              helper.date_time_format_string)
